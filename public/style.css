@@ -5,11 +5,15 @@ body {
   font-family: Arial;
 }
 
+input, select {
+  padding: 8px;
+  margin: 5px;
+}
+
 button {
   padding: 10px 20px;
   background: #5865f2;
   border: none;
   color: white;
   border-radius: 8px;
-  cursor: pointer;
 }
