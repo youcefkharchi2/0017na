@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>7nax7na System</title>
 
+  <!-- Tailwind -->
   <script src="https://cdn.tailwindcss.com"></script>
 
   <style>
@@ -15,21 +16,15 @@
       overflow-x: hidden;
     }
 
-    /* YouTube Background */
+    /* Video Background */
     .video-bg {
       position: fixed;
       top: 0;
       left: 0;
       width: 100%;
       height: 100%;
+      object-fit: cover;
       z-index: -1;
-      overflow: hidden;
-    }
-
-    .video-bg iframe {
-      width: 100vw;
-      height: 100vh;
-      pointer-events: none;
     }
 
     /* Glass effect */
@@ -44,14 +39,11 @@
 
 <body class="text-white">
 
-  <!-- YouTube Background -->
-  <div class="video-bg">
-    <iframe 
-      src="https://www.youtube.com/embed/Gk9spYNF5uQ?autoplay=1&mute=1&controls=0&loop=1&playlist=Gk9spYNF5uQ"
-      frameborder="0"
-      allow="autoplay; fullscreen">
-    </iframe>
-  </div>
+  <!-- VIDEO BACKGROUND -->
+  <video autoplay muted loop playsinline class="video-bg">
+    <source src="https://cdn.discordapp.com/attachments/1416548432579006535/1486096303124516914/District_10_RZ_-_GTA_V_FiveM_Loading_Screen_Cinematic.mp4"
+            type="video/mp4">
+  </video>
 
   <!-- HEADER -->
   <header class="flex justify-between items-center p-6 glass">
