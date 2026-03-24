@@ -1,4 +1,3 @@
-// server.js
 const express = require('express');
 const path = require('path');
 const app = express();
@@ -7,21 +6,21 @@ const port = process.env.PORT || 3000;
 // Serve static files (HTML, CSS, video, etc.)
 app.use(express.static(path.join(__dirname)));
 
-// الصفحة الرئيسية: توجه لأي زائر إلى login.html أولاً
+// أي زائر يدخل على "/" → نوجهه مباشرة إلى login.html
 app.get('/', (req, res) => {
   res.sendFile(path.join(__dirname, 'login.html'));
 });
 
-// Redirect بعد تسجيل الدخول عبر Discord
+// بعد تسجيل الدخول عبر Discord (redirect) → نوجهه للصفحة الرئيسية
 app.get('/redirect', (req, res) => {
   const code = req.query.code;
 
-  // هنا يمكن تبادل الكود مع Discord API للحصول على user info
-  // بعد التأكد، نوجه المستخدم مباشرة إلى الصفحة الرئيسية
+  // هنا يمكنك التحقق من الكود مع Discord API إذا تحب
+  // بعد التأكد، توجه المستخدم إلى index.html
   res.redirect('/index.html');
 });
 
-// Optional: صفحة dashboard أو أي مسارات أخرى
+// Optional: dashboard أو مسارات أخرى
 app.get('/dashboard', (req, res) => {
   res.sendFile(path.join(__dirname, 'index.html'));
 });
