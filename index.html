@@ -5,7 +5,6 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>7nax7na System</title>
 
-  <!-- Tailwind -->
   <script src="https://cdn.tailwindcss.com"></script>
 
   <style>
@@ -13,8 +12,24 @@
       margin: 0;
       padding: 0;
       font-family: sans-serif;
-      background: url('https://media.discordapp.net/attachments/1486031660473647196/1486090147928997908/e1d956840d70716b808ff2d4be5cd71e.jpg?ex=69c43ccd&is=69c2eb4d&hm=3fa0d3c63c216b00d48aeae06c6a5b7bdf45b31d2d505f517ae5eb83bad150e1&=&format=webp&width=540&height=960') no-repeat center center fixed;
-      background-size: cover;
+      overflow-x: hidden;
+    }
+
+    /* YouTube Background */
+    .video-bg {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: -1;
+      overflow: hidden;
+    }
+
+    .video-bg iframe {
+      width: 100vw;
+      height: 100vh;
+      pointer-events: none;
     }
 
     /* Glass effect */
@@ -28,6 +43,15 @@
 </head>
 
 <body class="text-white">
+
+  <!-- YouTube Background -->
+  <div class="video-bg">
+    <iframe 
+      src="https://www.youtube.com/embed/Gk9spYNF5uQ?autoplay=1&mute=1&controls=0&loop=1&playlist=Gk9spYNF5uQ"
+      frameborder="0"
+      allow="autoplay; fullscreen">
+    </iframe>
+  </div>
 
   <!-- HEADER -->
   <header class="flex justify-between items-center p-6 glass">
@@ -91,7 +115,7 @@
 
   <!-- FOOTER -->
   <footer class="p-6 text-center glass mt-10">
-    <p>© 2026 7nax7na System - جميع الحقوق محفوظة</p>
+    <p>© 2026 7nax7na System</p>
   </footer>
 
 </body>
