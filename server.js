@@ -8,7 +8,7 @@ require('dotenv').config();
 const app = express();
 const PORT = process.env.PORT || 3000;
 
-// مهم مع Render (HTTPS)
+// مهم مع Render
 app.set('trust proxy', 1);
 
 // إعدادات
@@ -17,11 +17,11 @@ app.set('views', path.join(__dirname, 'views'));
 app.use(express.static('public'));
 app.use(express.urlencoded({ extended: true }));
 
-// Session (مصلوحة)
+// Session (مصلوحة 100%)
 app.use(session({
   secret: 'secret123',
   resave: false,
-  saveUninitialized: false,
+  saveUninitialized: true,
   cookie: {
     secure: true,
     sameSite: "none"
@@ -35,7 +35,7 @@ app.use(passport.session());
 passport.serializeUser((user, done) => done(null, user));
 passport.deserializeUser((obj, done) => done(null, obj));
 
-// Discord Login
+// Discord Strategy
 passport.use(new DiscordStrategy({
   clientID: process.env.CLIENT_ID,
   clientSecret: process.env.CLIENT_SECRET,
@@ -56,14 +56,16 @@ app.get('/login', passport.authenticate('discord'));
 app.get('/auth/callback',
   passport.authenticate('discord', { failureRedirect: '/' }),
   (req, res) => {
-    console.log("LOGIN SUCCESS");
+    console.log("LOGIN SUCCESS ✅");
+    console.log("USER:", req.user);
     res.redirect('/dashboard');
   }
 );
 
 app.get('/dashboard', (req, res) => {
+  console.log("USER IN DASHBOARD:", req.user);
+
   if (!req.user) {
-    console.log("NO USER");
     return res.redirect('/');
   }
 
