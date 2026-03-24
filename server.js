@@ -29,8 +29,8 @@ passport.serializeUser((user, done) => done(null, user));
 passport.deserializeUser((obj, done) => done(null, obj));
 
 passport.use(new DiscordStrategy({
-  clientID: process.env.CLIENT_ID,
-  clientSecret: process.env.CLIENT_SECRET,
+ clientID: "1486022873821876224",
+clientSecret: "PigKsVU8jRy_rKmGr6Ot_Y7C3gACTaPK",
   callbackURL: "https://zero017na.onrender.com/auth/callback",
   scope: ["identify", "guilds"]
 },
