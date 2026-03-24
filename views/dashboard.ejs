@@ -2,27 +2,16 @@
 <html>
 <head>
   <title>Dashboard</title>
+  <link rel="stylesheet" href="/style.css">
 </head>
 <body>
 
-<h1>🔥 Dashboard</h1>
-
-<p><b>User:</b> <%= user.username %></p>
-
-<h3>Servers:</h3>
-<ul>
-  <% if (user.guilds) { %>
-    <% user.guilds.forEach(guild => { %>
-      <li><%= guild.name %></li>
-    <% }) %>
-  <% } %>
-</ul>
-
-<br>
-<a href="/logout"><button>Logout</button></a>
 <h1>Welcome <%= user.username %>!</h1>
 <p>ID: <%= user.id %></p>
 <img src="https://cdn.discordapp.com/avatars/<%= user.id %>/<%= user.avatar %>.png" width="100"/>
+
+<br><br>
+<a href="/logout" class="btn">Logout</a>
 
 </body>
 </html>
