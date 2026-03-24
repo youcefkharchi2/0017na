@@ -27,13 +27,13 @@ app.get('/', (req, res) => {
   }
 });
 
-// Login link
+// رابط تسجيل الدخول بالـ Discord
 app.get('/auth/discord', (req, res) => {
   const url = `https://discord.com/api/oauth2/authorize?client_id=${CLIENT_ID}&redirect_uri=${encodeURIComponent(REDIRECT_URI)}&response_type=code&scope=identify%20guilds`;
   res.redirect(url);
 });
 
-// Callback
+// Callback بعد تسجيل الدخول
 app.get('/auth/discord/callback', async (req, res) => {
   const code = req.query.code;
   if (!code) return res.send("No code provided");
@@ -71,6 +71,12 @@ app.get('/auth/discord/callback', async (req, res) => {
 app.get('/dashboard', (req, res) => {
   if (!req.session.user) return res.redirect('/');
   res.render('dashboard', { user: req.session.user });
+});
+
+// Logout
+app.get('/logout', (req, res) => {
+  req.session.destroy();
+  res.redirect('/');
 });
 
 app.listen(process.env.PORT || 3000, () => console.log("Server running"));
