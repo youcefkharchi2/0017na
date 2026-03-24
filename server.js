@@ -78,5 +78,8 @@ app.get('/logout', (req, res) => {
   req.session.destroy();
   res.redirect('/');
 });
+console.log("CLIENT_ID:", process.env.DISCORD_CLIENT_ID);
+console.log("CLIENT_SECRET:", process.env.DISCORD_CLIENT_SECRET);
+console.log("REDIRECT_URI:", process.env.DISCORD_REDIRECT_URI);
 
 app.listen(process.env.PORT || 3000, () => console.log("Server running"));
