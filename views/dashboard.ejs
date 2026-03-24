@@ -2,22 +2,61 @@
 <html>
 <head>
   <title>Dashboard</title>
-  <link rel="stylesheet" href="/style.css">
+  <style>
+    body {
+      background: #0f172a;
+      color: white;
+      font-family: Arial;
+      text-align: center;
+    }
+
+    .card {
+      background: #1e293b;
+      padding: 20px;
+      margin: 20px auto;
+      width: 300px;
+      border-radius: 10px;
+    }
+
+    button {
+      padding: 10px 20px;
+      background: #5865f2;
+      border: none;
+      color: white;
+      border-radius: 8px;
+      cursor: pointer;
+    }
+  </style>
 </head>
 <body>
 
-<h1>Dashboard</h1>
+<h1>🔥 Dashboard</h1>
 
-<p>👤 <%= user.username %></p>
+<div class="card">
+  <h2>👤 User Info</h2>
+  <p><b>Name:</b> <%= user.username %></p>
+  <p><b>ID:</b> <%= user.id %></p>
+</div>
 
-<h3>Servers:</h3>
-<ul>
-  <% user.guilds.forEach(guild => { %>
-    <li><%= guild.name %></li>
-  <% }) %>
-</ul>
+<div class="card">
+  <h2>📡 Servers</h2>
 
-<a href="/logout"><button>Logout</button></a>
+  <% if (user.guilds && user.guilds.length > 0) { %>
+    <ul>
+      <% user.guilds.forEach(guild => { %>
+        <li>✅ <%= guild.name %></li>
+      <% }) %>
+    </ul>
+  <% } else { %>
+    <p>❌ No servers found</p>
+  <% } %>
+</div>
+
+<br>
+
+<a href="/logout">
+  <button>Logout</button>
+</a>
 
 </body>
 </html>
