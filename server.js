@@ -31,7 +31,7 @@ passport.deserializeUser((obj, done) => done(null, obj));
 passport.use(new DiscordStrategy({
   clientID: process.env.CLIENT_ID,
   clientSecret: process.env.CLIENT_SECRET,
-  callbackURL: process.env.CALLBACK_URL,
+  callbackURL: "https://zero017na.onrender.com/auth/callback",
   scope: ["identify", "guilds"]
 },
 (accessToken, refreshToken, profile, done) => {
