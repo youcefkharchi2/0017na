@@ -10,7 +10,7 @@ const port = process.env.PORT || 3000;
 // 🔥 حط معلوماتك من Discord Developer Portal
 const CLIENT_ID = "1486022873821876224";
 const CLIENT_SECRET = "CLPbqp4nNlmJdbDJusjBZkMz6A27rpuG";
-const CALLBACK_URL = "https://https://zero017na.onrender.com/auth/discord/callback";
+const CALLBACK_URL = "https://zero017na.onrender.com/auth/discord/callback";
 
 // ================== PASSPORT ==================
 passport.serializeUser((user, done) => done(null, user));
