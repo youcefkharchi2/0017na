@@ -15,6 +15,7 @@
       overflow-x: hidden;
     }
 
+    /* VIDEO BACKGROUND */
     .video-bg {
       position: fixed;
       top: 0;
@@ -22,9 +23,21 @@
       width: 100%;
       height: 100%;
       object-fit: cover;
+      z-index: -2;
+    }
+
+    /* DARK OVERLAY باش النص يبان */
+    .overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0,0,0,0.5);
       z-index: -1;
     }
 
+    /* GLASS EFFECT */
     .glass {
       background: rgba(255, 255, 255, 0.08);
       backdrop-filter: blur(12px);
@@ -40,6 +53,9 @@
     <source src="video.mp4" type="video/mp4">
   </video>
 
+  <!-- OVERLAY -->
+  <div class="overlay"></div>
+
   <!-- HEADER -->
   <header class="flex justify-between items-center p-6 glass">
     
@@ -50,11 +66,11 @@
       <h1 class="text-2xl font-bold">7nax7na System</h1>
     </div>
 
-    <!-- LOGIN BUTTON -->
-    <button onclick="login()"
-      class="px-4 py-2 rounded glass hover:bg-white/20">
-      Login
-    </button>
+    <!-- LOGIN -->
+    <a href="/auth/discord"
+      class="px-4 py-2 rounded glass hover:bg-white/20 transition">
+      Login with Discord
+    </a>
 
   </header>
 
@@ -69,22 +85,22 @@
       𝐓𝐡𝐢𝐬 𝐰𝐞𝐛𝐬𝐢𝐭𝐞 𝐰𝐚𝐬 𝐜𝐫𝐞𝐚𝐭𝐞𝐝 𝐛𝐲 𝐝𝐞𝐯𝐞𝐥𝐨𝐩𝐞𝐫 𝟎𝟎𝟏𝐱𝐭𝐨𝐮𝐧𝐢
     </p>
 
-    <!-- ADD BOT -->
-    <a href="https://discord.com/oauth2/authorize?client_id=1486022873821876224&scope=bot&permissions=8"
-       class="px-8 py-4 text-lg rounded glass hover:bg-white/20 transition mb-4 inline-block">
-       أضف البوت الآن
-    </a>
+    <!-- BUTTONS -->
+    <div class="flex flex-col items-center gap-4">
 
-    <!-- DASHBOARD BUTTON -->
-    <button onclick="goDashboard()"
-       class="px-8 py-4 text-lg rounded glass hover:bg-white/20 transition inline-block">
-       لوحة التحكم
-    </button>
+      <!-- ADD BOT -->
+      <a href="https://discord.com/oauth2/authorize?client_id=1486022873821876224&scope=bot&permissions=8"
+         class="px-8 py-4 text-lg rounded glass hover:bg-white/20 transition">
+         أضف البوت الآن
+      </a>
 
-    <!-- ERROR -->
-    <p id="error" class="text-red-500 mt-4 hidden">
-      لازم تسجل الدخول أولاً!
-    </p>
+      <!-- DASHBOARD -->
+      <a href="/dashboard"
+         class="px-8 py-4 text-lg rounded glass hover:bg-white/20 transition">
+         لوحة التحكم
+      </a>
+
+    </div>
 
   </section>
 
@@ -105,24 +121,6 @@
   <footer class="p-6 text-center glass mt-10">
     <p>© 7nax7na System by developer 001</p>
   </footer>
-
-  <!-- SCRIPT -->
-  <script>
-    let loggedIn = false;
-
-    function login() {
-      loggedIn = true;
-      alert("تم تسجيل الدخول بنجاح ✅");
-    }
-
-    function goDashboard() {
-      if (loggedIn) {
-        window.location.href = "/dashboard";
-      } else {
-        document.getElementById("error").classList.remove("hidden");
-      }
-    }
-  </script>
 
 </body>
 </html>
