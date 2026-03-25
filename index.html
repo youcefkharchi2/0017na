@@ -26,7 +26,7 @@
       z-index: -2;
     }
 
-    /* DARK OVERLAY باش النص يبان */
+    /* DARK OVERLAY */
     .overlay {
       position: fixed;
       top: 0;
@@ -43,6 +43,13 @@
       backdrop-filter: blur(12px);
       border: 1px solid rgba(255, 255, 255, 0.15);
     }
+
+    /* ERROR MESSAGE */
+    #error {
+      color: #ff4d4f;
+      margin-top: 10px;
+      display: none;
+    }
   </style>
 </head>
 
@@ -58,7 +65,6 @@
 
   <!-- HEADER -->
   <header class="flex justify-between items-center p-6 glass">
-    
     <div class="flex items-center gap-3">
       <img 
         src="https://images-ext-1.discordapp.net/external/uP9p6RG2vF0SimOB5MoNbWvpw35wXLqHdA-nDDr4dec/%3Fsize%3D1024/https/cdn.discordapp.com/icons/1479508830420336703/366f3f6ac8a9544d88f041756e1eeec9.png?format=webp&quality=lossless"
@@ -71,12 +77,10 @@
       class="px-4 py-2 rounded glass hover:bg-white/20 transition">
       Login with Discord
     </a>
-
   </header>
 
   <!-- HERO -->
   <section class="text-center py-40 px-4">
-    
     <h2 class="text-5xl font-bold mb-6 drop-shadow-lg">
       𝐖𝐞𝐥𝐜𝐨𝐦𝐞 𝐭𝐨 𝐨𝐮𝐫 𝐬𝐞𝐫𝐯𝐞𝐫 𝐰𝐞𝐛𝐬𝐢𝐭𝐞
     </h2>
@@ -95,13 +99,15 @@
       </a>
 
       <!-- DASHBOARD -->
-      <a href="/dashboard"
+      <button onclick="goDashboard()"
          class="px-8 py-4 text-lg rounded glass hover:bg-white/20 transition">
          لوحة التحكم
-      </a>
+      </button>
+
+      <!-- ERROR MESSAGE -->
+      <p id="error">❌ لازم تسجل الدخول أولاً!</p>
 
     </div>
-
   </section>
 
   <!-- SUPPORT -->
@@ -121,6 +127,21 @@
   <footer class="p-6 text-center glass mt-10">
     <p>© 7nax7na System by developer 001</p>
   </footer>
+
+  <script>
+    function goDashboard() {
+      // نحاول ندخل للـ dashboard
+      fetch('/check-session')
+        .then(res => res.json())
+        .then(data => {
+          if (data.loggedIn) {
+            window.location.href = '/dashboard';
+          } else {
+            document.getElementById('error').style.display = 'block';
+          }
+        });
+    }
+  </script>
 
 </body>
 </html>
