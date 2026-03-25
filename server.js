@@ -7,7 +7,7 @@ const DiscordStrategy = require('passport-discord').Strategy;
 const app = express();
 const port = process.env.PORT || 3000;
 
-// 🔥 Discord Bot credentials
+// 🌐 Discord credentials
 const CLIENT_ID = "1486022873821876224";
 const CLIENT_SECRET = "CLPbqp4nNlmJdbDJusjBZkMz6A27rpuG";
 const CALLBACK_URL = "https://zero017na.onrender.com/auth/discord/callback";
@@ -26,12 +26,16 @@ passport.use(new DiscordStrategy({
 }));
 
 // ================== MIDDLEWARE ==================
+app.set('trust proxy', 1); // مهم على Render
+
 app.use(session({
   secret: "supersecretkey",
   resave: false,
   saveUninitialized: false,
   cookie: {
-    maxAge: 1000 * 60 * 60 * 24 // 24h
+    maxAge: 1000 * 60 * 60 * 24, // 24h
+    secure: process.env.NODE_ENV === "production", // true على Render
+    sameSite: 'lax'
   }
 }));
 
@@ -59,7 +63,7 @@ app.get('/auth/discord/callback',
   }
 );
 
-// 🔎 Check session (for frontend)
+// 🔎 Check session (frontend)
 app.get('/check-session', (req, res) => {
   res.json({ loggedIn: req.isAuthenticated() });
 });
