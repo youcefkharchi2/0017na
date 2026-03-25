@@ -5,7 +5,6 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>7nax7na System</title>
 
-  <!-- Tailwind CSS -->
   <script src="https://cdn.tailwindcss.com"></script>
 
   <style>
@@ -16,7 +15,6 @@
       overflow-x: hidden;
     }
 
-    /* Video Background */
     .video-bg {
       position: fixed;
       top: 0;
@@ -27,11 +25,9 @@
       z-index: -1;
     }
 
-    /* Glass effect */
     .glass {
       background: rgba(255, 255, 255, 0.08);
       backdrop-filter: blur(12px);
-      -webkit-backdrop-filter: blur(12px);
       border: 1px solid rgba(255, 255, 255, 0.15);
     }
   </style>
@@ -39,22 +35,30 @@
 
 <body class="text-white">
 
-  <!-- VIDEO BACKGROUND -->
+  <!-- VIDEO -->
   <video autoplay muted loop playsinline class="video-bg">
     <source src="video.mp4" type="video/mp4">
   </video>
 
   <!-- HEADER -->
   <header class="flex justify-between items-center p-6 glass">
+    
     <div class="flex items-center gap-3">
       <img 
         src="https://images-ext-1.discordapp.net/external/uP9p6RG2vF0SimOB5MoNbWvpw35wXLqHdA-nDDr4dec/%3Fsize%3D1024/https/cdn.discordapp.com/icons/1479508830420336703/366f3f6ac8a9544d88f041756e1eeec9.png?format=webp&quality=lossless"
         class="w-12 h-12 rounded-full">
       <h1 class="text-2xl font-bold">7nax7na System</h1>
     </div>
+
+    <!-- LOGIN BUTTON -->
+    <button onclick="login()"
+      class="px-4 py-2 rounded glass hover:bg-white/20">
+      Login
+    </button>
+
   </header>
 
-  <!-- HERO SECTION -->
+  <!-- HERO -->
   <section class="text-center py-40 px-4">
     
     <h2 class="text-5xl font-bold mb-6 drop-shadow-lg">
@@ -65,24 +69,28 @@
       𝐓𝐡𝐢𝐬 𝐰𝐞𝐛𝐬𝐢𝐭𝐞 𝐰𝐚𝐬 𝐜𝐫𝐞𝐚𝐭𝐞𝐝 𝐛𝐲 𝐝𝐞𝐯𝐞𝐥𝐨𝐩𝐞𝐫 𝟎𝟎𝟏𝐱𝐭𝐨𝐮𝐧𝐢
     </p>
 
-    <!-- زر إضافة البوت -->
+    <!-- ADD BOT -->
     <a href="https://discord.com/oauth2/authorize?client_id=1486022873821876224&scope=bot&permissions=8"
        class="px-8 py-4 text-lg rounded glass hover:bg-white/20 transition mb-4 inline-block">
        أضف البوت الآن
     </a>
 
-    <!-- زر لوحة التحكم تحت زر البوت -->
-    <a href="/dashboard"
+    <!-- DASHBOARD BUTTON -->
+    <button onclick="goDashboard()"
        class="px-8 py-4 text-lg rounded glass hover:bg-white/20 transition inline-block">
        لوحة التحكم
-    </a>
+    </button>
+
+    <!-- ERROR -->
+    <p id="error" class="text-red-500 mt-4 hidden">
+      لازم تسجل الدخول أولاً!
+    </p>
 
   </section>
 
-  <!-- FEATURES (DA3M ONLY) -->
-  <section class="py-20 px-6 grid grid-cols-1 md:grid-cols-1 gap-8 text-center">
-
-    <div class="p-6 rounded glass">
+  <!-- SUPPORT -->
+  <section class="py-20 px-6 text-center">
+    <div class="p-6 rounded glass inline-block">
       <h3 class="text-xl font-bold mb-2">💬 دعم مباشر</h3>
       <p>فريق الدعم متوفر دائماً لمساعدتك</p>
 
@@ -91,13 +99,30 @@
          دخول سيرفر الدعم
       </a>
     </div>
-
   </section>
 
   <!-- FOOTER -->
   <footer class="p-6 text-center glass mt-10">
     <p>© 7nax7na System by developer 001</p>
   </footer>
+
+  <!-- SCRIPT -->
+  <script>
+    let loggedIn = false;
+
+    function login() {
+      loggedIn = true;
+      alert("تم تسجيل الدخول بنجاح ✅");
+    }
+
+    function goDashboard() {
+      if (loggedIn) {
+        window.location.href = "/dashboard";
+      } else {
+        document.getElementById("error").classList.remove("hidden");
+      }
+    }
+  </script>
 
 </body>
 </html>
