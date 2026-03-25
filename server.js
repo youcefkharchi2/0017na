@@ -7,7 +7,7 @@ const DiscordStrategy = require('passport-discord').Strategy;
 const app = express();
 const port = process.env.PORT || 3000;
 
-// 🔥 حط معلوماتك من Discord Developer Portal
+// 🔥 Discord Bot credentials
 const CLIENT_ID = "1486022873821876224";
 const CLIENT_SECRET = "CLPbqp4nNlmJdbDJusjBZkMz6A27rpuG";
 const CALLBACK_URL = "https://zero017na.onrender.com/auth/discord/callback";
@@ -38,7 +38,7 @@ app.use(session({
 app.use(passport.initialize());
 app.use(passport.session());
 
-// Static files
+// Serve static files
 app.use(express.static(path.join(__dirname)));
 
 // ================== ROUTES ==================
@@ -49,16 +49,20 @@ app.get('/', (req, res) => {
 });
 
 // 🔐 تسجيل الدخول
-app.get('/auth/discord',
-  passport.authenticate('discord'));
+app.get('/auth/discord', passport.authenticate('discord'));
 
-// 🔁 الرجوع من Discord
+// 🔁 Callback من Discord
 app.get('/auth/discord/callback',
   passport.authenticate('discord', { failureRedirect: '/' }),
   (req, res) => {
     res.redirect('/dashboard');
   }
 );
+
+// 🔎 Check session (for frontend)
+app.get('/check-session', (req, res) => {
+  res.json({ loggedIn: req.isAuthenticated() });
+});
 
 // 🧠 Dashboard محمية
 app.get('/dashboard', (req, res) => {
@@ -67,6 +71,7 @@ app.get('/dashboard', (req, res) => {
       <h2 style="color:red;text-align:center;margin-top:50px;">
         ❌ لازم تسجل الدخول أولاً
       </h2>
+      <p style="text-align:center;"><a href="/">الرجوع للرئيسية</a></p>
     `);
   }
 
@@ -84,27 +89,15 @@ app.get('/dashboard', (req, res) => {
           font-family: sans-serif;
           padding-top: 50px;
         }
-        img {
-          border-radius: 50%;
-        }
-        a {
-          color: #38bdf8;
-          text-decoration: none;
-          display: inline-block;
-          margin-top: 20px;
-        }
+        img { border-radius: 50%; }
+        a { color: #38bdf8; text-decoration: none; display: inline-block; margin-top: 20px; }
       </style>
     </head>
     <body>
-
       <h1>مرحبا ${user.username} 👋</h1>
-
       <img src="https://cdn.discordapp.com/avatars/${user.id}/${user.avatar}.png" width="100">
-
       <p>راك داخل بنجاح 🔥</p>
-
       <a href="/logout">🚪 تسجيل الخروج</a>
-
     </body>
     </html>
   `);
@@ -117,12 +110,12 @@ app.get('/logout', (req, res) => {
   });
 });
 
-// ❌ صفحة غير موجودة
+// ❌ 404
 app.use((req, res) => {
   res.status(404).send("404 Not Found");
 });
 
-// ================== START ==================
+// ================== START SERVER ==================
 app.listen(port, () => {
   console.log(`Server running on port ${port}`);
 });
